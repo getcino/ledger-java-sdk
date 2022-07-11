@@ -1,0 +1,47 @@
+package com.formance.ledgerclient.api;
+
+import com.formance.ledgerclient.CollectionFormats.*;
+
+import retrofit2.Call;
+import retrofit2.http.*;
+
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import okhttp3.MultipartBody;
+
+import com.formance.ledgerclient.model.Mapping;
+import com.formance.ledgerclient.model.MappingResponse;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public interface MappingApi {
+  /**
+   * Get the mapping of a ledger.
+   * 
+   * @param ledger Name of the ledger. (required)
+   * @return Call&lt;MappingResponse&gt;
+   */
+  @GET("{ledger}/mapping")
+  Call<MappingResponse> getMapping(
+    @retrofit2.http.Path("ledger") String ledger
+  );
+
+  /**
+   * Update the mapping of a ledger.
+   * 
+   * @param ledger Name of the ledger. (required)
+   * @param mapping  (required)
+   * @return Call&lt;MappingResponse&gt;
+   */
+  @Headers({
+    "Content-Type:application/json"
+  })
+  @PUT("{ledger}/mapping")
+  Call<MappingResponse> updateMapping(
+    @retrofit2.http.Path("ledger") String ledger, @retrofit2.http.Body Mapping mapping
+  );
+
+}
